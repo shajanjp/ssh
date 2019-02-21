@@ -8,29 +8,16 @@
 </head>
 <body>
   <div class="window">
-  ~/ $<input type="text">
+  ~$ <input type="text">
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/data-feeder.js"></script>
   <script>
-    function list(content){
-      return `<p>${content}</p>`;
-    }
-
-    const replays = {
-      "ls": list("projects photos cv"),
-      "ls -l": list(`total 28
-<br>drwxrwxr-x   4 dev281 dev281  4096 Feb 21 16:57 ./
-<br>drwxr-xr-x 147 dev281 dev281 12288 Feb 21 16:51 ../
-<br>drwxrwxr-x   2 dev281 dev281  4096 Feb 21 16:57 css/
-<br>drwxrwxr-x   8 dev281 dev281  4096 Feb 21 17:26 .git/
-<br>-rw-rw-r--   1 dev281 dev281  1042 Feb 21 17:26 index.html`)
-}
-
     $(document).on("keyup", "input", function(e) {
       if (e.keyCode == 13) {
         let stdin = this.value;
         console.log('stdin', stdin);
-        $(".window").append(`${replays[stdin]} ~/ $<input type="text">`);
+        $(".window").append(`${getReplay(stdin)} ~$ <input type="text">`);
         $("input:last").focus();
       }
     });
