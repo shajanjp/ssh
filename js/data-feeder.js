@@ -2,25 +2,86 @@ function line(content){
   return `<p>${content}</p>`;
 }
 
+function renderObject(data){
+  let thData =  ""
+  let tdData = ""
+  for (var k in data) {
+    thData += `<td>${k}</td>`;
+    tdData += `<td>${data[k]}</td>`;
+ }
+ return `<table>
+  <tr>${thData}</tr>
+  <tr>${tdData}</tr>
+ </table>`;
+}
+
 
 const mainTree = {
   "projects": {
-    "project A": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio!",
-    "project B": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, facilis.",  
-    "project C": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, facilis.",  
-    "project D": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, facilis." 
+    "project-a": {
+      "description": "Description",
+      "isEnd": true,
+      "title": "Title",
+      "nodeType": "PROJECT"
+    },
+    "project-b": {
+      "description": "Description",
+      "isEnd": true,
+      "title": "Title",
+      "nodeType": "PROJECT"
+    }
   },
-  "thoughts": ["Thought 1", "Thought 2", "Thought 3", "Thought 4", "Thought 5", "Thought 6"]
+  "thoughts": {
+    "thought-b": {
+      "isEnd": true,
+      "title": "Title 1",
+    },
+    "thought-a": {
+      "isEnd": true,
+      "title": "Title 2",
+    } 
+  },
+  "profiles": {
+    "email": "shajan@gmail.com",
+    "facebook": "shajanjp",
+    "github": "shajanjp",
+    "instagram": "shajanjp",
+    "linkedin": "shajanjp",
+    "pinterest": "shajanjp",
+    "skype": "shajanjp",
+    "twitter": "shajanjp",
+    "youtube": "shajanjp"
+  }
 }
 
-let currentPath = mainTree;
+let currentPathStack = [];
+
+function currentPath(){
+  let cPath = mainTree;
+  currentPathStack.forEach((path) => {
+    cPath = cPath[path];
+  }); 
+  return cPath;
+}
 
 function lsCommand(){
-  return line(Object.keys(currentPath).join(" "));
+  if(currentPath().isEnd == true){
+    return line(renderObject(currentPath()))
+  }
+  else{ 
+    return line(Object.keys(currentPath()).join(" "));
+  }
 }
 
-function cdCommand(path){
-  currentPath = currentPath[path];
+function cdCommand(paths){
+  paths.forEach((path) => {
+    if(currentPath()[path]){
+      currentPathStack.push(path);
+    }
+    if(path=='..'){
+     currentPathStack.pop(); 
+    }
+  })
   return line("");
 }
 
