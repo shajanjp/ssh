@@ -8,7 +8,8 @@
 </head>
 <body>
   <div class="window">
-  ~$ <input type="text">
+  <span class="stdout-text">~</span>$ <input type="text">
+
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/data-feeder.js"></script>
@@ -17,7 +18,7 @@
       if (e.keyCode == 13) {
         let stdin = this.value;
         console.log('stdin', stdin);
-        $(".window").append(`${getReplay(stdin)} ~$ <input type="text">`);
+        $(".window").append(getReplay(stdin));
         $("input:last").focus();
       }
     });
