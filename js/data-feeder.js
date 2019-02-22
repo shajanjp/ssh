@@ -104,21 +104,28 @@ const replays = {
 }
 
 function getReplay(command){
+  let renderedReplay='';
   let commandSplit = command.split(" ")
-  console.log('commandSplit[1]', commandSplit[1]);
+  console.log('commandSplit.slice(1)', commandSplit.slice(1));
   switch(commandSplit[0]) {
     case "ls":
-      return lsCommand();
-      break;
+    renderedReplay = lsCommand();
+    break;
     
     case "cd":
-      return cdCommand(commandSplit[1]);
-      break;
+    renderedReplay = cdCommand(command.split("cd ")[1].split('/'));
+    break;
+    
+    case "whoami":
+    renderedReplay = line("shajan");
+    break;
     
     default:
-      break;
-    // code block
+    renderedReplay = `<p>${command}: command not found</p>`;
+    break;
   }
-
-  return replays[command] || `<p>${command}: command not found</p>`;
+   renderedReplay += `<span class="stdout-text">${currentPathStack.join('/')}</span> $ <input type="text">`;
+   return renderedReplay;
 }
+
+
