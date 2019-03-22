@@ -1,26 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Terminal</title>
-  <meta name="theme-color" content="#000" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <div class="window">
-  <span class="stdout-text">~</span>$ <input type="text"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="js/data-feeder.js"></script>
-  <script>
-    $(document).on("keyup", "input", function(e) {
-      if (e.keyCode == 13) {
-        let stdin = this.value;
-        console.log('stdin', stdin);
-        $(".window").append(getReplay(stdin));
-        $("input:last").focus();
-      }
-    });
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Terminal</title>
+    <meta name="theme-color" content="#000" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="window">
+      <span class="stdout-text">~</span>$ <input type="text" />
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/data-feeder.js"></script>
+    <script>
+      let commandsPrediction = ['cd', 'ls', 'cat', 'man', 'whoami'];
+      let filesystemPrediction = [];
+      $('input:last').val('');
+      $('input:last').focus();
+      $(document).on('keyup', 'input', function(e) {
+        if (e.keyCode == 13) {
+          let stdin = this.value;
+          console.log('stdin', stdin);
+          $('.window').append(getReplay(stdin));
+          $('input:last').focus();
+        }
+      });
+
+      // prediction
+      $(document).on('keydown', 'input', function(e) {
+        if (e.keyCode == 9) {
+          let CommandFromUser = this.value.split(' ');
+          let lastCommandFromUser = CommandFromUser[CommandFromUser.length - 1];
+          let predictionFound = false;
+
+          predictionFound = commandsPrediction.find(function(element) {
+            return element.startsWith(lastCommandFromUser);
+          });
+
+          console.log('predictionFound', predictionFound);
+
+          if (!predictionFound) {
+            console.log(
+              'inside fsp',
+              filesystemPrediction,
+              lastCommandFromUser
+            );
+            predictionFound = filesystemPrediction.find(function(element) {
+              return element.startsWith(lastCommandFromUser);
+            });
+          }
+
+          $(this).val(`${CommandFromUser.slice(0, -1)} ${predictionFound}`);
+          $(this).focus();
+          e.preventDefault();
+        }
+      });
+    </script>
+  </body>
 </html>
