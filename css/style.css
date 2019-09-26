@@ -19,5 +19,6 @@ input{
   font-family: 'Courier New';
   color: white;
   background: black;
-  border: none;
+  border-color: black !important;
+  border: none !important;
 }
