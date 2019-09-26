@@ -1,5 +1,5 @@
 body{
-  font-family: Ubuntu;
+  font-family: 'Courier New';
   font-weight: 400;
   background: #000; 
   color: #fff;
@@ -16,7 +16,7 @@ table td{
 input{
   padding-left: 4px;
   font-size: 1em;
-  font-family: Ubuntu;
+  font-family: 'Courier New';
   color: white;
   background: black;
   border: none;
