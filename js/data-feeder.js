@@ -48,7 +48,7 @@ const mainTree = {
     linkedin: 'shajanjp',
     pinterest: 'shajanjp',
     skype: 'shajanjp',
-    twitter: 'shajanjp',
+    twitter: 'shajanjacob',
     youtube: 'shajanjp',
   },
   stories: {
