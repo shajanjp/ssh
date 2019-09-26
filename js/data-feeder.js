@@ -127,6 +127,6 @@ function getReplay(command) {
   }
   renderedReplay += `<span class="stdout-text">${currentPathStack.join(
     '/'
-  )}</span> $ <input type="text">`;
+  )}</span> $<input type="text">`;
   return renderedReplay;
 }
