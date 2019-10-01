@@ -83,7 +83,7 @@
             });
           }
 
-          $(this).val(`${CommandFromUser.slice(0, -1)} ${predictionFound}`);
+          $(this).val(`${CommandFromUser.slice(0, -1)} ${predictionFound || lastCommandFromUser}`);
           $(this).focus();
           e.preventDefault();
         }
