@@ -15,50 +15,6 @@ function renderObject(data) {
  </table>`;
 }
 
-const mainTree = {
-  projects: {
-    'project-a': {
-      isEnd: true,
-      description: 'Description',
-      title: 'Title',
-      nodeType: 'PROJECT',
-    },
-    'project-b': {
-      isEnd: true,
-      description: 'Description',
-      title: 'Title',
-      nodeType: 'PROJECT',
-    },
-  },
-  thoughts: {
-    'thought-b': {
-      isEnd: true,
-      title: 'Title 1',
-    },
-    'thought-a': {
-      isEnd: true,
-      title: 'Title 2',
-    },
-  },
-  profiles: {
-    email: 'shajan@gmail.com',
-    facebook: 'shajanjp',
-    github: 'shajanjp',
-    instagram: 'shajanjp',
-    linkedin: 'shajanjp',
-    pinterest: 'shajanjp',
-    skype: 'shajanjp',
-    twitter: 'shajanjacob',
-    youtube: 'shajanjp',
-  },
-  stories: {
-    'story-1': {
-      isEnd: true,
-      title: 'My little story',
-    },
-  },
-};
-
 let currentPathStack = [];
 
 function currentPath() {
