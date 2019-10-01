@@ -34,16 +34,28 @@ function lsCommand() {
   }
 }
 
-function cdCommand(paths) {
-  paths.forEach(path => {
-    if (currentPath()[path]) {
-      currentPathStack.push(path);
-    }
-    if (path == '..') {
-      currentPathStack.pop();
-    }
-  });
-  return line('');
+function pwdCommand(){
+  return line(`/${currentPathStack.join('/')}`)
+}
+
+function cdCommand(relativePath) {
+  if(relativePath == ''){
+    currentPathStack = []
+    return line('');
+  }
+  else {
+    relativePath = relativePath.trim();
+    let paths = relativePath.split('/');
+    paths.forEach(path => {
+      if (currentPath()[path]) {
+        currentPathStack.push(path);
+      }
+      if (path == '..') {
+        currentPathStack.pop();
+      }
+    });
+    return line('');
+  }
 }
 
 const replays = {
@@ -68,9 +80,13 @@ function getReplay(command) {
     case 'ls':
       renderedReplay = lsCommand();
       break;
+    
+    case 'pwd':
+      renderedReplay = pwdCommand();
+      break;
 
     case 'cd':
-      renderedReplay = cdCommand(command.split('cd ')[1].split('/'));
+      renderedReplay = cdCommand(command.split('cd')[1]);
       break;
 
     case 'whoami':
