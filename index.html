@@ -35,7 +35,9 @@
     <script src="js/data-feeder.js"></script>
     <script>
       let commandsPrediction = ['cd', 'ls', 'cat', 'man', 'whoami'];
-      let filesystemPrediction = [];
+      let filesystemPrediction = Object.keys(currentPath());
+      let pathStack = ['/'];
+
       $('input:last').val('');
       $('input:last').focus();
 
