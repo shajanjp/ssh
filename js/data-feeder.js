@@ -3,15 +3,12 @@ function line(content) {
 }
 
 function renderObject(data) {
-  let thData = '';
-  let tdData = '';
+  let tData = '';
   for (var k in data) {
-    thData += `<td>${k}</td>`;
-    tdData += `<td>${data[k]}</td>`;
+    tData += `<tr><td class="c-faded">${k}</td><td>${data[k]}</td></tr>`;
   }
   return `<table>
-  <tr>${thData}</tr>
-  <tr>${tdData}</tr>
+  ${tData}
  </table>`;
 }
 
