@@ -55,6 +55,10 @@ function cdCommand(relativePath) {
   }
 }
 
+function catCommand(path){
+
+}
+
 const replays = {
   //   "ls -l": line(`total 5
   // <br>drwxrwxr-x 1 <a href="http://shajanjacob.com">Shajan Jacob</a> js Feb 21 16:57 \t ./
@@ -84,6 +88,10 @@ function getReplay(command) {
 
     case 'cd':
       renderedReplay = cdCommand(command.split('cd')[1]);
+      break;
+
+    case 'cat':
+      renderedReplay = catCommand(command.split('cat ')[1])
       break;
 
     case 'whoami':
