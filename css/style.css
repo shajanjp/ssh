@@ -16,10 +16,12 @@ body{
 .stdout-text{
   color: #0f0;
 }
-
+.c-faded{
+  color: #aaa;
+}
 table td{
-  padding-right:10px;
-  text-align: right; 
+  padding-left:10px;
+  text-align: left; 
 } 
 input{
   padding-left: 4px;
