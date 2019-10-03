@@ -1,3 +1,6 @@
+---
+---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,14 +13,31 @@
   </head>
   <body>
     <div class="window">
+      Welcome to <a href="http://shajanjacob.com">shajanjacob.com</a><br>
+      * Home: <a href="http://shajanjacob.com">http://shajanjacob.com</a><br>
+      * Blog: <a href="http://shajanjacob.com/blog">http://shajanjacob.com/blog</a><br>
+      * Projects: <a href="http://shajanjacob.com/projects">http://shajanjacob.com/projects</a><br>
+      * Contact: <a href="http://shajanjacob.com/contact">http://shajanjacob.com/contact</a><br><br>
+
+      15 projects completed.<br>
+      2 blogs written.<br>
+      12 photos added.<br><br>
+
+      *** Everything working perfect ***<br>
+      Last login: Fri Sep 20 16:44:06 2019 from 122.166.65.49<br>
       <span class="stdout-text">~</span>$<input type="text" />
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      const mainTree = {{ site.data.content | jsonify }};
+    </script>
     <script src="js/data-feeder.js"></script>
     <script>
       let commandsPrediction = ['cd', 'ls', 'cat', 'man', 'whoami'];
-      let filesystemPrediction = [];
+      let filesystemPrediction = Object.keys(currentPath());
+      let pathStack = ['/'];
+
       $('input:last').val('');
       $('input:last').focus();
 
@@ -63,7 +83,7 @@
             });
           }
 
-          $(this).val(`${CommandFromUser.slice(0, -1)} ${predictionFound}`);
+          $(this).val(`${CommandFromUser.slice(0, -1)} ${predictionFound || lastCommandFromUser}`);
           $(this).focus();
           e.preventDefault();
         }

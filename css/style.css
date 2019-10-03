@@ -3,6 +3,9 @@
   -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important; 
   outline: none !important;
 }
+a, a:visited{
+  color: #999;
+}
 body{
   font-family: 'Courier New';
   font-weight: 400;

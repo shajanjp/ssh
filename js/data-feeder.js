@@ -15,50 +15,6 @@ function renderObject(data) {
  </table>`;
 }
 
-const mainTree = {
-  projects: {
-    'project-a': {
-      isEnd: true,
-      description: 'Description',
-      title: 'Title',
-      nodeType: 'PROJECT',
-    },
-    'project-b': {
-      isEnd: true,
-      description: 'Description',
-      title: 'Title',
-      nodeType: 'PROJECT',
-    },
-  },
-  thoughts: {
-    'thought-b': {
-      isEnd: true,
-      title: 'Title 1',
-    },
-    'thought-a': {
-      isEnd: true,
-      title: 'Title 2',
-    },
-  },
-  profiles: {
-    email: 'shajan@gmail.com',
-    facebook: 'shajanjp',
-    github: 'shajanjp',
-    instagram: 'shajanjp',
-    linkedin: 'shajanjp',
-    pinterest: 'shajanjp',
-    skype: 'shajanjp',
-    twitter: 'shajanjacob',
-    youtube: 'shajanjp',
-  },
-  stories: {
-    'story-1': {
-      isEnd: true,
-      title: 'My little story',
-    },
-  },
-};
-
 let currentPathStack = [];
 
 function currentPath() {
@@ -78,16 +34,28 @@ function lsCommand() {
   }
 }
 
-function cdCommand(paths) {
-  paths.forEach(path => {
-    if (currentPath()[path]) {
-      currentPathStack.push(path);
-    }
-    if (path == '..') {
-      currentPathStack.pop();
-    }
-  });
-  return line('');
+function pwdCommand(){
+  return line(`/${currentPathStack.join('/')}`)
+}
+
+function cdCommand(relativePath) {
+  if(relativePath == ''){
+    currentPathStack = []
+    return line('');
+  }
+  else {
+    relativePath = relativePath.trim();
+    let paths = relativePath.split('/');
+    paths.forEach(path => {
+      if (currentPath()[path]) {
+        currentPathStack.push(path);
+      }
+      if (path == '..') {
+        currentPathStack.pop();
+      }
+    });
+    return line('');
+  }
 }
 
 const replays = {
@@ -112,9 +80,13 @@ function getReplay(command) {
     case 'ls':
       renderedReplay = lsCommand();
       break;
+    
+    case 'pwd':
+      renderedReplay = pwdCommand();
+      break;
 
     case 'cd':
-      renderedReplay = cdCommand(command.split('cd ')[1].split('/'));
+      renderedReplay = cdCommand(command.split('cd')[1]);
       break;
 
     case 'whoami':
