@@ -3,16 +3,11 @@ function line(content) {
 }
 
 function renderObject(data) {
-  let thData = '';
-  let tdData = '';
+  let rData = '';
   for (var k in data) {
-    thData += `<td>${k}</td>`;
-    tdData += `<td>${data[k]}</td>`;
+    rData += `<p><span class="c-faded">${k}</span> : ${data[k]}</p>`;
   }
-  return `<table>
-  <tr>${thData}</tr>
-  <tr>${tdData}</tr>
- </table>`;
+  return rData;
 }
 
 let currentPathStack = [];
@@ -58,6 +53,10 @@ function cdCommand(relativePath) {
   }
 }
 
+function catCommand(path){
+
+}
+
 const replays = {
   //   "ls -l": line(`total 5
   // <br>drwxrwxr-x 1 <a href="http://shajanjacob.com">Shajan Jacob</a> js Feb 21 16:57 \t ./
@@ -89,6 +88,18 @@ function getReplay(command) {
       renderedReplay = cdCommand(command.split('cd')[1]);
       break;
 
+    case 'cat':
+      renderedReplay = catCommand(command.split('cat ')[1])
+      break;
+
+    case 'exit':
+      window.close();
+      break;
+
+    case 'uptime':
+      renderedReplay = line(sinceExact(new Date(1993, 7, 24)));
+      break;
+
     case 'whoami':
       renderedReplay = line('shajan');
       break;
@@ -99,6 +110,6 @@ function getReplay(command) {
   }
   renderedReplay += `<span class="stdout-text">${currentPathStack.join(
     '/'
-  )}</span> $<input type="text">`;
+  )}</span> $<input type="text" autocorrect="off" autocapitalize="off">`;
   return renderedReplay;
 }
