@@ -94,6 +94,10 @@ function getReplay(command) {
       renderedReplay = catCommand(command.split('cat ')[1])
       break;
 
+    case 'exit':
+      window.close();
+      break;
+
     case 'whoami':
       renderedReplay = line('shajan');
       break;
