@@ -98,6 +98,10 @@ function getReplay(command) {
       window.close();
       break;
 
+    case 'uptime':
+      renderedReplay = line(sinceExact(new Date(1993, 7, 24)));
+      break;
+
     case 'whoami':
       renderedReplay = line('shajan');
       break;
