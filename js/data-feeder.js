@@ -80,6 +80,7 @@ function getReplay(command) {
 
     case 'exit':
       window.close();
+      renderedReplay = line('');
       break;
 
     case 'uptime':
