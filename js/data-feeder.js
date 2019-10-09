@@ -1,3 +1,14 @@
+const commadsList = {
+  "cat": 'concatenate files and print on the standard output',
+  "cd": "change the working directory",
+  "exit": "exits console",
+  "help": "an interface to this page",
+  "ls": "list directory contents",
+  "pwd": "print name of current/working directory",
+  "uptime": "tell how long the system has been running",
+  "whoami": "print effective username",
+};
+
 function line(content) {
   return `<p>${content}</p>`;
 }
@@ -63,40 +74,44 @@ function getReplay(command) {
   console.log('commandSplit.slice(1)', commandSplit.slice(1));
   switch (commandSplit[0]) {
     case 'ls':
-      renderedReplay = lsCommand();
-      break;
+    renderedReplay = lsCommand();
+    break;
     
     case 'pwd':
-      renderedReplay = pwdCommand();
-      break;
+    renderedReplay = pwdCommand();
+    break;
 
     case 'cd':
-      renderedReplay = cdCommand(command.split('cd')[1]);
-      break;
+    renderedReplay = cdCommand(command.split('cd')[1]);
+    break;
 
     case 'cat':
-      renderedReplay = catCommand(command.split('cat ')[1])
-      break;
+    renderedReplay = catCommand(command.split('cat ')[1])
+    break;
 
     case 'exit':
-      window.close();
-      renderedReplay = line('');
-      break;
+    window.close();
+    renderedReplay = line('');
+    break;
 
     case 'uptime':
-      renderedReplay = line(sinceExact(new Date(1993, 7, 24)));
-      break;
+    renderedReplay = line(sinceExact(new Date(1993, 7, 24)));
+    break;
 
     case 'whoami':
-      renderedReplay = line('shajan');
-      break;
+    renderedReplay = line('shajan');
+    break;
+
+    case 'help':
+    renderedReplay = renderObject(commadsList)
+    break;
 
     default:
-      renderedReplay = `<p>${command}: command not found</p>`;
-      break;
+    renderedReplay = `<p>${command}: command not found</p>`;
+    break;
   }
   renderedReplay += `<span class="stdout-text">${currentPathStack.join(
     '/'
-  )}</span> $<input type="text" autocorrect="off" autocapitalize="off">`;
+    )}</span> $<input type="text" autocorrect="off" autocapitalize="off">`;
   return renderedReplay;
 }
