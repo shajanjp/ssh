@@ -3,13 +3,11 @@ function line(content) {
 }
 
 function renderObject(data) {
-  let tData = '';
+  let rData = '';
   for (var k in data) {
-    tData += `<tr><td class="c-faded">${k}</td><td>${data[k]}</td></tr>`;
+    rData += `<p><span class="c-faded">${k}</span> : ${data[k]}</p>`;
   }
-  return `<table>
-  ${tData}
- </table>`;
+  return rData;
 }
 
 let currentPathStack = [];
